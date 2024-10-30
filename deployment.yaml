@@ -1,23 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: leed
+  name: web-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: leed
+      app: web-app
   template:
     metadata:
       labels:
-        app: leed
+        app: web-app
     spec:
       containers:
-      - name: leed
+      - name: web-app-container
         image: edouard071203/image_leed
         ports:
-        - containerPort: 8080
-      - name: leed-mysql
-        image: mysql:5.7
-        ports:
-        - containerPort: 3306
+        - containerPort: 3000
