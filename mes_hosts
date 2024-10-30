@@ -1,4 +1,4 @@
 #mes_hosts
 [mes_machines]
-pc_portable ansible_host=127.0.0.1
-pc_portable ansible_port=2222
+pc_portable ansible_host=10.221.102.100
+pc_portable ansible_port=22

@@ -3,7 +3,7 @@
 - name: Mon premier playbook
   connection: ssh
   hosts: mes_machines
-  remote_user: stamboue
+  remote_user: hirlho
   become: true
   tasks:
     - name: Ping the system
@@ -41,7 +41,7 @@
 
     - name: Add user to the Docker group
       user:
-        name: stamboue
+        name: hirlho
         groups: docker
         append: yes
     - name: Télécharger Minikube
@@ -68,7 +68,7 @@
 
     - name: Ajouter une ligne au fichier .bashrc
       ansible.builtin.lineinfile:
-        path: "/home/stamboue/.bashrc"
+        path: "/home/hirlho/.bashrc"
         line: 'alias kubectl="minikube kubectl --"'
 
     - name: Instllation de git
