@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app
+  name: leed
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: web-app
+      app: leed
   template:
     metadata:
       labels:
-        app: web-app
+        app: leed
     spec:
       containers:
-      - name: web-app-container
+      - name: leed
         image: edouard071203/image_leed
         ports:
         - containerPort: 3000
