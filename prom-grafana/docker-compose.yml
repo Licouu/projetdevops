@@ -1,0 +1,38 @@
+services:
+  cadvisor:
+    image: 'google/cadvisor:latest'
+    container_name: cadvisor
+    volumes:
+          - /:/rootfs:ro
+          - /var/run:/var/run:ro
+          - /sys:/sys:ro
+          - /var/lib/docker/:/var/lib/docker:ro
+          - /dev/disk:/dev/disk/:ro
+    ports:
+        - '8081:8080'
+
+  prometheus:
+    image: 'prom/prometheus:v2.17.2'
+    container_name: prometheus
+    user: root
+    volumes:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+        - '9090:9090'
+
+  grafana:
+    image: 'grafana/grafana:6.1.6'
+    container_name: grafana
+    environment:
+        - GF_SECURITY_ADMIN_PASSWORD=pass
+    volumes:
+        - grafana_data:/var/lib/grafana
+        - ./datasource.json:/etc/grafana/provisioning/datasources/datasource.json
+        - ./dashboard.json:/etc/grafana/provisioning/dashboards/dashboard.json
+    ports:
+        - "3000:3000"
+  
+volumes:
+  grafana_data:
