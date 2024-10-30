@@ -60,7 +60,6 @@
       ansible.builtin.command:
         cmd: "mv /tmp/minikube /usr/local/bin/minikube"
         creates: "/usr/local/bin/minikube"
-
     - name: Rendre Minikube exécutable
       ansible.builtin.file:
         path: "/usr/local/bin/minikube"
@@ -72,3 +71,7 @@
         path: "/home/stamboue/.bashrc"
         line: 'alias kubectl="minikube kubectl --"'
 
+    - name: Instllation de git
+      ansible.builtin.package:
+        name: git
+        state: present
