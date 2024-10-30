@@ -41,6 +41,37 @@
 
     - name: Add user to the Docker group
       user:
-        name: markon
+        name: stamboue
         groups: docker
         append: yes
+    - name: Télécharger Minikube
+      ansible.builtin.get_url:
+        url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
+        dest: "/tmp/minikube"
+        mode: "0755"
+
+    - name: Créer le répertoire /usr/local/bin s'il n'existe pas
+      ansible.builtin.file:
+        path: "/usr/local/bin"
+        state: directory
+        mode: "0755"
+
+    - name: Déplacer Minikube vers /usr/local/bin
+      ansible.builtin.command:
+        cmd: "mv /tmp/minikube /usr/local/bin/minikube"
+        creates: "/usr/local/bin/minikube"
+    - name: Rendre Minikube exécutable
+      ansible.builtin.file:
+        path: "/usr/local/bin/minikube"
+        mode: "0755"
+        state: file
+
+    - name: Ajouter une ligne au fichier .bashrc
+      ansible.builtin.lineinfile:
+        path: "/home/stamboue/.bashrc"
+        line: 'alias kubectl="minikube kubectl --"'
+
+    - name: Instllation de git
+      ansible.builtin.package:
+        name: git
+        state: present
