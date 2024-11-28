@@ -32,7 +32,19 @@ kubectl apply -f leed-service.yml
 
 echo "[I] Démarrage de Prometheus..."
 
-kubectl apply -f prom-grafana/kube-supp/
+kubectl apply -f prom-grafana/kube-supp/prometheus-cm0-configmap.yaml
+kubectl apply -f prom-grafana/kube-supp/prometheus-deployment.yaml
+kubectl apply -f prom-grafana/kube-supp/prometheus-service.yaml
+
+echo "[I] Démarrage de Grafana..."
+
+kubectl apply -f prom-grafana/kube-supp/grafana-cm1-configmap.yaml
+kubectl apply -f prom-grafana/kube-supp/grafana-cm2-configmap.yaml
+kubectl apply -f prom-grafana/kube-supp/grafana-data-persistentvolumeclaim.yaml
+kubectl apply -f prom-grafana/kube-supp/grafana-data-pv.yaml
+kubectl apply -f prom-grafana/kube-supp/grafana-deployment.yaml
+kubectl apply -f prom-grafana/kube-supp/grafana-service.yaml
 
 echo "[I] Leed a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31117/"
 echo "[I] Prometheus a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):9090/"
+echo "[I] Grafana a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):30001/"
