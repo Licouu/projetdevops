@@ -14,26 +14,21 @@ data:
     rule_files:
 
     scrape_configs:
-      - job_name: 'prometheus'
+      - job_name: 'mysql-service'
         static_configs:
-        - targets: ['localhost:9090'] # ip du serveur (ou localhost?)
+        - targets: ['mysql-service:3306'] # ip du serveur (ou localhost?)
 
-      - job_name: 'cadvisor'
+      - job_name: 'leed-service'
         static_configs:
-        - targets: ['localhost:8081'] # ip du cluster où y a l'appli web
+        - targets: ['leed-service:31117'] # ip du cluster où y a l'appli web
 
       # Nouveau job pour surveiller le conteneur "dummy"
       #- job_name: 'dummy'
       #  static_configs:
       #  - targets: ['dummy:8080']
 
-    # Ajouter des "-job_name" pour chaque pod/conteneur
-      - job_name: 'leed'
-        static_configs:
-        - targets: ['172.27.204.192:31007']
-
     remote_write:
-      - url: 'http://localhost:3000'
+      - url: 'http://grafana:3000'
         basic_auth:
           username: admin
           password: pass
