@@ -46,5 +46,5 @@ kubectl apply -f prom-grafana/kube-supp/grafana-deployment.yaml
 kubectl apply -f prom-grafana/kube-supp/grafana-service.yaml
 
 echo "[I] Leed a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31117/"
-echo "[I] Prometheus a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):9090/"
+echo "[I] Prometheus a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31111/"
 echo "[I] Grafana a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):30001/"
