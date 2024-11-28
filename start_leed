@@ -30,4 +30,4 @@ kubectl apply -f mysql-service.yml
 kubectl apply -f web-app-deployement.yml
 kubectl apply -f leed-service.yml
 
-echo "[I] L'application a été lancée"
+echo "[I] L'application a été lancée à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31117/"
