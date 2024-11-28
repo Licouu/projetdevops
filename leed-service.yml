@@ -5,9 +5,9 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: leed
+    app: web-app
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 31007  # Port par lequel l'application sera accessible
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31117  # Port externe pour accéder à l'application
