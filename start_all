@@ -22,9 +22,9 @@ else
 	fi
 fi
 
-sudo mkdir -p /tmp/hostpath-provisioner/default/grafana-data && \
-sudo chown -R 1000:1000 /tmp/hostpath-provisioner/default/grafana-data && \
-sudo chmod -R 755 /tmp/hostpath-provisioner/default/grafana-data
+mkdir -p /tmp/hostpath-provisioner/default/grafana-data 
+chown -R 1000:1000 /tmp/hostpath-provisioner/default/grafana-data 
+chmod -R 755 /tmp/hostpath-provisioner/default/grafana-data
 
 # lancement de leed
 echo "[I] Démarrage de Leed..."
