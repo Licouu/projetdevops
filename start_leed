@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo
+echo "Projet DevOps (https://github.com/Licouu/projetdevops/)"
+echo
+
+# lancement de minikube
+if ! command -v minikube 2>&1 > /dev/null
+then
+	echo "[E] minikube n'est pas installé !"
+	exit 1
+else
+	echo "[I] minikube est présent"
+	if [[ -z $(minikube status | grep "host: Running") ]]
+	then
+		echo "[W] minikube n'est pas démarré"
+		echo "[I] Démarrage..."
+		minikube start 2>&1 > /dev/null
+		echo "[I] minikube a été démarré"
+	else
+		echo "[I] minikube est déjà démarré"
+	fi
+fi
+
+# lancement de leed
+echo "[I] Démarrage de Leed..."
+
+kubectl apply -f mysql-pod.yml
+kubectl apply -f mysql-service.yml
+kubectl apply -f web-app-deployement.yml
+kubectl apply -f leed-service.yml
+
+echo "[I] L'application a été lancée"

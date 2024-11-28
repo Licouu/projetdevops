@@ -17,3 +17,5 @@ spec:
         image: edouard071203/image_leed
         ports:
         - containerPort: 3000
+      - name: leed-sql
+        image: mysql:5.7
