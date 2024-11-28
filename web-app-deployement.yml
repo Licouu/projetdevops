@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: web-app
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 1  # Max 1 pod indisponible pendant la mise à jour
+        maxSurge: 1 
   template:
     metadata:
       labels:
@@ -17,6 +22,18 @@ spec:
         image: edouard071203/image_leed
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
         env:
         - name: MYSQL_HOST
           value: mysql-service
