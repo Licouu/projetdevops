@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  datasource.json: |
+    {
+      "apiVersion": 1,
+      "datasources": [
+        {
+          "name": "Prometheus",
+          "type": "prometheus",
+          "url": "http://localhost:9090",
+          "access": "proxy",
+          "basicAuth": false,
+          "isDefault": true
+        }
+      ]
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: grafana
+  name: grafana-cm1
