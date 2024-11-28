@@ -30,4 +30,9 @@ kubectl apply -f mysql-service.yml
 kubectl apply -f web-app-deployement.yml
 kubectl apply -f leed-service.yml
 
-echo "[I] L'application a été lancée à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31117/"
+echo "[I] Démarrage de Prometheus..."
+
+kubectl apply -f prom-grafana/kube-supp/
+
+echo "[I] Leed a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):31117/"
+echo "[I] Prometheus a été lancé à http://$(kubectl get nodes -o wide | grep minikube | cut -d " " -f 17):9090/"
